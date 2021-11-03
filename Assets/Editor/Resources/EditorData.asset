@@ -13,4 +13,12 @@ MonoBehaviour:
   m_Name: EditorData
   m_EditorClassIdentifier: 
   data:
-    data: []
+    data:
+    - key: SampleControllerEditor
+      values:
+      - key: _someBoolEditorField
+        value: '{"value":true}'
+      - key: _someFloatEditorField
+        value: '{"value":0.7689999938011169}'
+      - key: _someColorEditorField
+        value: '{"value":{"r":0.9339622855186462,"g":0.013216422870755196,"b":0.013216422870755196,"a":1.0}}'

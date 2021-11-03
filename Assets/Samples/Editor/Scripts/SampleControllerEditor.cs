@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using EditorDataStorage.Editor;
 using Samples.Scripts;
 using UnityEditor;
@@ -15,14 +16,11 @@ namespace Samples.Editor.Scripts
 
         private void OnEnable()
         {
-            EditorData.GetData(typeof(SampleControllerEditor), ref _someBoolEditorField,
-                               nameof(_someBoolEditorField));
+            EditorData.GetData(this, nameof(_someColorEditorField));
 
-            EditorData.GetData(typeof(SampleControllerEditor), ref _someColorEditorField,
-                               nameof(_someColorEditorField));
+            EditorData.GetData(this, nameof(_someColorEditorField));
 
-            EditorData.GetData(typeof(SampleControllerEditor), ref _someFloatEditorField,
-                               nameof(_someFloatEditorField));
+            EditorData.GetData(this, nameof(_someFloatEditorField));
         }
 
         public override void OnInspectorGUI()
@@ -36,9 +34,8 @@ namespace Samples.Editor.Scripts
             if (!_someBoolEditorField.Equals(bufferBool))
             {
                 _someBoolEditorField = bufferBool;
-                EditorData.SetData(typeof(SampleControllerEditor), nameof(_someBoolEditorField), _someBoolEditorField);
+                EditorData.SetData(this, nameof(_someBoolEditorField));
             }
-            
             if (!_someBoolEditorField) return;
 
             var bufferColor = EditorGUI.ColorField(EditorGUILayout.GetControlRect(),
@@ -48,9 +45,7 @@ namespace Samples.Editor.Scripts
             if (!_someColorEditorField.Equals(bufferColor))
             {
                 _someColorEditorField = bufferColor;
-
-                EditorData.SetData(typeof(SampleControllerEditor), nameof(_someColorEditorField),
-                                   _someColorEditorField);
+                EditorData.SetData(this, nameof(_someColorEditorField));
             }
 
             var bufferFloat = EditorGUI.Slider(EditorGUILayout.GetControlRect(),
@@ -60,9 +55,7 @@ namespace Samples.Editor.Scripts
             if (!_someFloatEditorField.Equals(bufferFloat))
             {
                 _someFloatEditorField = bufferFloat;
-
-                EditorData.SetData(typeof(SampleControllerEditor), nameof(_someFloatEditorField),
-                                   _someFloatEditorField);
+                EditorData.SetData(this, nameof(_someFloatEditorField));
             }
         }
     }

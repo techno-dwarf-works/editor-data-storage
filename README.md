@@ -12,7 +12,7 @@ and/or store fields data between working sessions.
 ```c#
 private void OnEnable()
 {
-    EditorData.GetData(typeof(SampleControllerEditor), ref _someColorEditorField, nameof(_someColorEditorField));
+    EditorData.GetData(this, nameof(_someColorEditorField));
 }
 ```
 
@@ -23,7 +23,7 @@ var bufferColor = EditorGUI.ColorField(EditorGUILayout.GetControlRect(), new GUI
 if (!_someColorEditorField.Equals(bufferColor))
 {
     _someColorEditorField = bufferColor;
-    EditorData.SetData(typeof(SampleControllerEditor), nameof(_someColorEditorField), _someColorEditorField);
+    EditorData.SetData(this, nameof(_someColorEditorField));
 }
 ```
 
