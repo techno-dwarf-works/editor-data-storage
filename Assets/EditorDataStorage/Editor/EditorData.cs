@@ -18,7 +18,8 @@ namespace EditorDataStorage.Editor
 
         private const string Path = "Editor/Resources";
 
-        private const BindingFlags Binding = BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic;
+        private const BindingFlags Binding =
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic;
 
         private static EditorData _instance;
 
@@ -45,6 +46,7 @@ namespace EditorDataStorage.Editor
             if (!Instance.data.TryGetValue(type, out var data)) return;
             var fieldInfo = type.GetField(fieldName, Binding);
             if (fieldInfo is null) return;
+
             if (data.ContainsKey(fieldName))
             {
                 fieldInfo.SetValue(editor, StringToObject(fieldInfo.FieldType, data[fieldName]));
@@ -57,7 +59,7 @@ namespace EditorDataStorage.Editor
             var fromJson = JsonUtility.FromJson(input, wrapper);
             return wrapper.GetField("value", Binding)?.GetValue(fromJson);
         }
-        
+
         private static object ObjectToWrapper(Type type, object input)
         {
             var wrapper = typeof(Wrapper<>).MakeGenericType(type);
@@ -78,8 +80,8 @@ namespace EditorDataStorage.Editor
             var type = editor.GetType();
             var fieldInfo = type.GetField(fieldName, Binding);
             if (fieldInfo is null) return;
-
             var fieldValue = fieldInfo.GetValue(editor);
+
             if (Instance.data.ContainsKey(type))
             {
                 var dic = Instance.data[type];
@@ -91,7 +93,7 @@ namespace EditorDataStorage.Editor
                 }
                 else
                 {
-                    dic.Add<T>(fieldName, fieldValue);
+                    dic.Add(fieldName, fieldInfo.FieldType, fieldValue);
                 }
             }
             else
@@ -142,9 +144,10 @@ namespace EditorDataStorage.Editor
                 set { values[values.FindIndex(x => x.key.Equals(fieldName))].value = value; }
             }
 
-            public void Add<T>(string fieldName, object fieldValue)
+            public void Add(string fieldName, Type fieldType, object fieldValue)
             {
-                var wrapper = new Wrapper<T> { value = (T)fieldValue };
+
+                var wrapper = ObjectToWrapper(fieldType, fieldValue);
                 values.Add(new LowLevelData { key = fieldName, value = wrapper.ToString() });
             }
 
