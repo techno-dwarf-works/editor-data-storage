@@ -93,7 +93,7 @@ namespace EditorDataStorage.Editor
                 }
                 else
                 {
-                    dic.Add<T>(fieldName, fieldValue);
+                    dic.Add(fieldName, fieldInfo.FieldType, fieldValue);
                 }
             }
             else
@@ -144,9 +144,10 @@ namespace EditorDataStorage.Editor
                 set { values[values.FindIndex(x => x.key.Equals(fieldName))].value = value; }
             }
 
-            public void Add<T>(string fieldName, object fieldValue)
+            public void Add(string fieldName, Type fieldType, object fieldValue)
             {
-                var wrapper = new Wrapper<T> { value = (T)fieldValue };
+
+                var wrapper = ObjectToWrapper(fieldType, fieldValue);
                 values.Add(new LowLevelData { key = fieldName, value = wrapper.ToString() });
             }
 
