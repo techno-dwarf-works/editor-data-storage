@@ -1,0 +1,20 @@
+{
+    "name": "BetterEditorStorage.Editor",
+    "rootNamespace": "Better.EditorStorage",
+    "references": [
+        "GUID:a59e3daedde9ca94bba45364d4ead25f",
+        "GUID:19891d5296046644cbc12fcf3702cca3",
+        "GUID:28da8d3b12e3efa47928e0c9070f853d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

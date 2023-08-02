@@ -1,0 +1,25 @@
+{
+  "name": "com.uurha.bettereditorstorage",
+  "displayName": "Better Editor Tools",
+  "description": "Collection of useful tools for Unity Editor",
+  "version": "0.0.5",
+  "unity": "2020.1",
+  "dependencies": {
+    "com.uurha.bettereditortools": "1.0.59"
+  },
+  "author": {
+    "name": "Arcueid D'athemon",
+    "url": "https://github.com/uurha"
+  },
+  "changelogUrl": "https://github.com/uurha/BetterEditorStorage",
+  "documentationUrl": "https://github.com/uurha/BetterEditorStorage/tree/main#readme",
+  "license": "MIT",
+  "licensesUrl":"https://github.com/uurha/BetterEditorStorage/blob/main/LICENSE",
+  "keywords": [
+    "editor",
+    "utilities",
+    "tools",
+    "extensions",
+    "storage"
+  ]
+}

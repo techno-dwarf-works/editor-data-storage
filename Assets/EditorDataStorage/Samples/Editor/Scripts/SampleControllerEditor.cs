@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using EditorDataStorage.Editor;
+using Better.EditorStorage.EditorAddons;
 using Samples.Scripts;
 using UnityEditor;
 using UnityEngine;
@@ -10,18 +10,9 @@ namespace Samples.Editor.Scripts
     [CustomEditor(typeof(SampleController))]
     public class SampleControllerEditor : UnityEditor.Editor
     {
-        private Color _someColorEditorField;
-        private bool _someBoolEditorField;
-        private float _someFloatEditorField;
-
-        private void OnEnable()
-        {
-            EditorData.GetData(this, nameof(_someColorEditorField));
-
-            EditorData.GetData(this, nameof(_someColorEditorField));
-
-            EditorData.GetData(this, nameof(_someFloatEditorField));
-        }
+        private Color _someColorEditorField = EditorDataStorage.GetData<Color>(nameof(_someColorEditorField));
+        private bool _someBoolEditorField = EditorDataStorage.GetData<bool>(nameof(_someBoolEditorField));
+        private float _someFloatEditorField = EditorDataStorage.GetData<float>(nameof(_someFloatEditorField));
 
         public override void OnInspectorGUI()
         {
@@ -34,7 +25,7 @@ namespace Samples.Editor.Scripts
             if (!_someBoolEditorField.Equals(bufferBool))
             {
                 _someBoolEditorField = bufferBool;
-                EditorData.SetData(this, nameof(_someBoolEditorField));
+                EditorDataStorage.SetData(nameof(_someBoolEditorField), _someBoolEditorField);
             }
             if (!_someBoolEditorField) return;
 
@@ -45,7 +36,7 @@ namespace Samples.Editor.Scripts
             if (!_someColorEditorField.Equals(bufferColor))
             {
                 _someColorEditorField = bufferColor;
-                EditorData.SetData(this, nameof(_someColorEditorField));
+                EditorDataStorage.SetData(nameof(_someColorEditorField), _someColorEditorField);
             }
 
             var bufferFloat = EditorGUI.Slider(EditorGUILayout.GetControlRect(),
@@ -55,7 +46,7 @@ namespace Samples.Editor.Scripts
             if (!_someFloatEditorField.Equals(bufferFloat))
             {
                 _someFloatEditorField = bufferFloat;
-                EditorData.SetData(this, nameof(_someFloatEditorField));
+                EditorDataStorage.SetData(nameof(_someFloatEditorField), _someFloatEditorField);
             }
         }
     }
